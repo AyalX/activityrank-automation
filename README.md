@@ -39,7 +39,7 @@ pip install pyautogui keyboard
 2. Run the script:
 
     ```
-    python give_rewards.py
+    python bonus-automation.py
     ```
 
 3. Press 'Home' to start the automation. If you want to stop the automation at any point, press 'Esc'.
