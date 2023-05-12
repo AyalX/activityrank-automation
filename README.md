@@ -58,8 +58,4 @@ Please be aware that automating input actions can sometimes result in unintended
 
 ## License
 
-This project is licensed under the terms of the MIT license.
-
-## Contribution
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+This project is released under the [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License](LICENSE.md).
