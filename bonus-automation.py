@@ -2,10 +2,27 @@ import time
 import pyautogui
 import keyboard
 
-def generate_commands():
+def read_file(file_name):
+    """Reads a file and returns its lines."""
+    try:
+        with open(file_name, 'r') as file:
+            return file.readlines()
+    except FileNotFoundError:
+        print(f"The file {file_name} was not found.")
+        return []
+
+def write_to_file(file_name, data):
+    """Writes data to a file."""
+    try:
+        with open(file_name, 'w') as file:
+            file.writelines(data)
+    except Exception as e:
+        print(f"Failed to write to the file {file_name}. Error: {str(e)}")
+
+def generate_commands(input_file, output_file):
+    """Generates slash commands from the given input file and writes them to the output file."""
     # Read input file
-    with open('give-rewards.txt', 'r') as file:
-        lines = file.readlines()
+    lines = read_file(input_file)
 
     # Process each line and create slash commands
     commands = []
@@ -18,15 +35,14 @@ def generate_commands():
             commands.append(command)
 
     # Write slash commands to output file
-    with open('commands.txt', 'w') as file:
-        file.writelines(commands)
+    write_to_file(output_file, commands)
 
     print("Slash commands generated successfully!")
 
-def execute_commands():
+def execute_commands(file_name):
+    """Reads commands from the given file and executes them."""
     # Open the file with commands
-    with open('commands.txt', 'r') as file:
-        commands = file.readlines()
+    commands = read_file(file_name)
 
     # Iterate over each command
     for command in commands:
@@ -47,14 +63,19 @@ def execute_commands():
         pyautogui.press('enter')
         time.sleep(1)
 
-def start_automation():
+def start_automation(input_file, output_file):
+    """Starts the automation process."""
     print("Press 'Home' to start the automation. Press 'Esc' to stop the automation.")
     keyboard.wait('home')
     print("Automation started!")
 
-    execute_commands()
+    generate_commands(input_file, output_file)
+    execute_commands(output_file)
 
     print("Automation completed successfully!")
 
-generate_commands()
-start_automation()
+# Configuration
+input_file = 'give-rewards.txt'
+output_file = 'commands.txt'
+
+start_automation(input_file, output_file)
